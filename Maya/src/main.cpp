@@ -17,29 +17,26 @@ void setup()
 void loop()
 {
   //put your main code here, to run repeatedly:
-  // wait_time = 2;
-  Serial.println(state);
+  wait_time = 2;
   
-  
-
 }
 
 void change_flow_rate()
 {
-  // delay(wait_time);
-  // digitalWrite(pump_control, HIGH);
-  // delay(5);
-  // digitalWrite(pump_control, LOW);
-  // Serial.print(millis());
+  delay(wait_time);
+  digitalWrite(pump_control, HIGH);
+  delay(5);
+  digitalWrite(pump_control, LOW);
+  Serial.print(millis());
   // state != state;
-  if(state)
-  {
-    state = false;
-    digitalWrite(PC13, LOW);
-  }
-  else
-  {
-    state = true;
-    digitalWrite(PC13, HIGH);
-  }
+  // if(state)
+  // {
+  //   state = false;
+  //   digitalWrite(PC13, LOW);
+  // }
+  // else
+  // {
+  //   state = true;
+  //   digitalWrite(PC13, HIGH);
+  // }
 }

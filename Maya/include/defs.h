@@ -8,6 +8,6 @@ float intial_coolant_temperature;
 float final_coolant_temperature;
 
 int zc_interrupt = PA0;
-int pump_control = PA1;
+int pump_control = PB4;
 
 int wait_time;
