@@ -28,8 +28,10 @@ void loop(void)
  sensors.requestTemperatures(); // Send the command to get temperature readings 
  //Serial.println("DONE"); 
 /********************************************************************/
-//Serial.print("Temperature is: "); 
- Serial.print(sensors.getTempCByIndex(0)); // Why "byIndex"?  
+  Serial.print("Temp 1 is: "); 
+ Serial.println(sensors.getTempCByIndex(0)); 
+ Serial.print("Temp 2 is: "); 
+ Serial.println(sensors.getTempCByIndex(1));// Why "byIndex"?  
    // You can have more than one DS18B20 on the same bus.  
    // 0 refers to the first IC on 
 } 
