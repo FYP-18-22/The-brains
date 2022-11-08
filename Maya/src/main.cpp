@@ -1,9 +1,12 @@
 #include <Arduino.h>
 #include "OneWire.h"
 #include "DallasTemperature.h"
+#include "max6675.h" 
 
-
-
+//Pin definitions
+#define  soPin  PB9// SO=Serial Out
+#define  csPin  PB6// CS = chip select CS pin
+#define sckPin  PB5// SCK = Serial Clock pi
 #define ONE_WIRE_BUS PB10
 
 
