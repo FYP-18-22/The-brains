@@ -32,4 +32,4 @@ void loop(void)
  Serial.print("Temp 2 is: "); 
  Serial.println(sensors.getTempCByIndex(1));// Why "byIndex"?  
    
-} 
+}
