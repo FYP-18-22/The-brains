@@ -1,12 +1,17 @@
+// include files
+
 #include <Arduino.h>
 #include "max6675.h" 
 
-int soPin = PB9;// SO=Serial Out
-int csPin = PB6;// CS = chip select CS pin
-int sckPin = PB5;// SCK = Serial Clock pin
+//Pin definitions
+#define  soPin  PB9// SO=Serial Out
+#define  csPin  PB6// CS = chip select CS pin
+#define sckPin  PB5// SCK = Serial Clock pin
+
+// Object creation
+MAX6675 thermocouple(sckPin, csPin, soPin);// create instance object of MAX6675
 
 
-MAX6675 Module(sckPin, csPin, soPin);// create instance object of MAX6675
 
 void setup() {
 
@@ -19,6 +24,6 @@ void setup() {
 void loop() {
   // basic readout test, just print the current temp
    Serial.print("C = "); 
-   Serial.println(Module.readCelsius());
+   Serial.println(thermocouple.readCelsius());
    delay(1000);
 }
