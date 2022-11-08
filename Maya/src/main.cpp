@@ -1,7 +1,12 @@
 #include <Arduino.h>
+#include <Wire.h> 
 #include "OneWire.h"
 #include "DallasTemperature.h"
 #include "max6675.h"
+#include "LiquidCrystal_I2C.h"
+
+
+
 
 // Pin definitions
 #define soPin PB9  // SO=Serial Out
@@ -13,13 +18,16 @@
 MAX6675 thermocouple(sckPin, csPin, soPin); // create instance object of MAX6675
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
+LiquidCrystal_I2C lcd(0x27,20,4); 
 
 
 void setup(void)
 {
 
   Serial.begin(115200);
-
+  lcd.init(); 
+  lcd.backlight();
+  lcd.print("Hello, world!");
   sensors.begin();
 }
 void loop(void)
