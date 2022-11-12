@@ -1,33 +1,33 @@
 #include <Arduino.h>
 #include <defs.h>
 
-volatile boolean state = true;
+volatile bool state = true;
 
 void setup()
 {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  pinMode(PA0, INPUT);
-  pinMode(pump_control, OUTPUT);
-  pinMode(PC13, OUTPUT);
-  digitalWrite(PC13, LOW);
-  attachInterrupt(digitalPinToInterrupt(PA0), change_flow_rate, CHANGE);
+  // pinMode(PA0, INPUT);
+  // pinMode(pump_control, OUTPUT);
+  // pinMode(PC13, OUTPUT);
+  // digitalWrite(PC13, LOW);
+  attachInterrupt(zc_interrupt, change_flow_rate, CHANGE);
 }
 
 void loop()
 {
   //put your main code here, to run repeatedly:
-  wait_time = 2;
+  //  Serial.println("Mike"); // wait_time = 2;
   
 }
 
 void change_flow_rate()
 {
-  delay(wait_time);
+  delay(2);
   digitalWrite(pump_control, HIGH);
-  delay(5);
+  delayMicroseconds(10);
   digitalWrite(pump_control, LOW);
-  Serial.print(millis());
+  Serial.println(millis());
   // state != state;
   // if(state)
   // {
