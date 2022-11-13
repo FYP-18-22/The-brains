@@ -124,15 +124,9 @@ bool DS18B20Test()
   lcd.clear();
   delay(1000);
   int count = 0;
-  
   while (count < 10)
   {
     delay(100);
-    // while (sensor0.isConnected(&oneWire))
-    // {
-    //   Serial.println("The DS18B20 sensors are not appropriately connected!!!!!!")
-    // }
-    lcd.println("There are two DS18B20 sensors connected.");
     if (sensor0.getTempCByIndex(0) > 0 && sensor0.getTempCByIndex(0) < 50 && sensor1.getTempCByIndex(0) > 0 && sensor1.getTempCByIndex(0))
     {
       count++;
