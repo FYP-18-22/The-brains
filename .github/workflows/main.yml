@@ -37,7 +37,7 @@ jobs:
             file: Maya\.pio\build\*\firmware.bin
             tag: ${{ github.ref }}
             overwrite: true
-            file_glob: true  
+             
             
             
       
