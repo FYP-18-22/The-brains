@@ -87,8 +87,10 @@ bool lcdTest()
 {
   lcd.init();
   lcd.backlight();
-  lcd.print("Hello, world!");
-  delay(100);
+  lcd.print("Maya v0.0.1");
+  lcd.setCursor(7,3);
+  lcd.print("FYP 18-22");
+  delay(1000);
   lcd.clear();
   lcd.print("Starting tests ........");
   delay(1000);
@@ -121,7 +123,6 @@ bool DS18B20Test()
 {
   lcd.clear();
   lcd.println("Running DS18B20 test !!!!!!!!!!");
-  lcd.clear();
   delay(1000);
   int count = 0;
   while (count < 10)
@@ -137,7 +138,7 @@ bool DS18B20Test()
     }
   }
   lcd.clear();
-  lcd.println("Exiting DS18B20 test.....!!!!!");
+  lcd.println("DS18B20 test complete.....!!!!!");
   delay(1000);
   return true;
 }
