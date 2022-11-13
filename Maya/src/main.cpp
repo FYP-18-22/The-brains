@@ -22,6 +22,7 @@ bool lcdTest();
 bool thermocoupleTest();
 bool DS18B20Test();
 void print_lcd(float temp1, float temp2, float temp3);
+void controlFlowrate(float tempDifference, float wallTemperature);
 
 
 //Global variables
@@ -149,5 +150,26 @@ void print_lcd(float temp1, float temp2, float temp3){
   lcd.setCursor(0,2);
   lcd.print("Probe 2: ");
   lcd.print(temp3);
+
+}
+
+/**
+ * @brief Function to control the pump flowrate
+ * @param tempDifference temperature difference from probes
+ * @param wallTemperature wall temperature of outer chamber
+ * @return void return
+*/
+void controlFlowrate(float tempDifference, float wallTemperature){
+  if(wallTemperature> CONTROL_TEMP_VALUE){
+    if(tempDifference >= MAX_TEMP_DIFF){
+      //control temperature
+
+    }
+  }
+}
+/**
+ * @brief function to log data
+*/
+void logData(){
 
 }
