@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include <string.h>
 #include "OneWire.h"
 #include "DallasTemperature.h"
 #include "max6675.h"
@@ -25,6 +26,11 @@ bool tests();
 bool lcdTest();
 bool thermocoupleTest();
 bool DS18B20Test();
+void print_lcd(String myText);
+
+
+//Global variables
+unsigned long lastRead;
 
 void setup(void)
 {
@@ -49,8 +55,7 @@ void loop(void)
   lcd.print(sensor0.getTempCByIndex(0));
   Serial.print("Temp 2 is: ");
   Serial.println(sensor1.getTempCByIndex(0));
-  lcd.print(sensor1.getTempCByIndex(0));
-  lcd.clear();
+ 
   
 }
 
@@ -129,4 +134,9 @@ bool DS18B20Test()
   lcd.println("Exiting DS18B20 test.....!!!!!");
   delay(1000);
   return true;
+}
+
+void print_lcd(String myText){
+  lcd.clear();
+  lcd.print(myText);
 }
