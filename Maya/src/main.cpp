@@ -6,9 +6,9 @@
 #include "LiquidCrystal_I2C.h"
 
 // Pin definitions
-#define soPin PB9  // SO=Serial Out
-#define csPin PB6  // CS = chip select CS pin
-#define sckPin PB5 // SCK = Serial Clock pi
+#define soPin PA6  // SO=Serial Out
+#define csPin PA7  // CS = chip select CS pin
+#define sckPin PA5 // SCK = Serial Clock pi
 #define ONE_WIRE_0 PB12
 #define ONE_WIRE_1 PB13
 
