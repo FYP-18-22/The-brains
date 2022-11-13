@@ -33,11 +33,12 @@ jobs:
       - name: create_release
         uses: svenstaro/upload-release-action@v1-release
         with:
-            repo_token: "${{ secrets.GITHUB_TOKEN }}"
-            file: Maya\.pio\build\*\firmware.bin
-            tag: ${{ github.ref }}
-            overwrite: true
-             
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: Maya\.pio\build\*\firmware.bin
+          asset_name: maya
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "Mayas latest release"
             
             
       
