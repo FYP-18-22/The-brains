@@ -1,9 +1,14 @@
 #include <Arduino.h>
+#include <Wire.h>
+#include <string.h>
+#include "OneWire.h"
+#include "DallasTemperature.h"
+#include "max6675.h"
+#include "LiquidCrystal_I2C.h"
 #include "defs.h"
 
 
-
-// Object creation
+// Objects
 MAX6675 thermocouple(sckPin, csPin, soPin); // create instance object of MAX6675
 OneWire oneWire(ONE_WIRE_0);
 OneWire oneWire1(ONE_WIRE_1);
