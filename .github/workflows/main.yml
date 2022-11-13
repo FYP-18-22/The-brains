@@ -34,7 +34,7 @@ jobs:
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: Maya\.pio\build\*\firmware.bin
+          file: Maya/.pio/build/*/firmware.bin
           asset_name: maya
           tag: ${{ github.ref }}
           overwrite: true
