@@ -32,9 +32,7 @@ void setup(void)
   Serial.begin(115200);
   sensor0.begin();
   sensor1.begin();
-  Serial.println("Beginning tests");
   tests();
-  Serial.println("Tests complete...........");
 }
 void loop(void)
 {
@@ -45,10 +43,15 @@ void loop(void)
   /********************************************************************/
   Serial.print("C = ");
   Serial.println(thermocouple.readCelsius());
+  lcd.print(thermocouple.readCelsius());
   Serial.print("Temp 1 is: ");
   Serial.println(sensor0.getTempCByIndex(0));
+  lcd.print(sensor0.getTempCByIndex(0));
   Serial.print("Temp 2 is: ");
   Serial.println(sensor1.getTempCByIndex(0));
+  lcd.print(sensor1.getTempCByIndex(0));
+  lcd.clear();
+  
 }
 
 bool tests()
@@ -67,17 +70,19 @@ bool tests()
 
 bool lcdTest()
 {
-  Serial.println("Running LCD test!!!!!!!");
   lcd.init();
   lcd.backlight();
   lcd.print("Hello, world!");
-  Serial.println("LCD printing......");
+  delay(100);
+  lcd.clear();
+  lcd.print("Starting tests ........");
   delay(1000);
   return true;
 }
 bool thermocoupleTest()
 {
-  Serial.println("Running thermocouple test!!!!");
+  lcd.clear();
+  lcd.print("Running thermocouple test!!!!");
   int count = 0;
   while (count < 10)
   {
@@ -85,21 +90,23 @@ bool thermocoupleTest()
     if (thermocouple.readCelsius() > 0 && thermocouple.readCelsius() < 50)
     {
       count++;
-      Serial.println("The value of coount is: ");
-      Serial.print(count);
     }
     else
     {
       continue;
     }
   }
-  Serial.println("Thermocouple test complete !!!!!!");
+  lcd.clear();
+  lcd.println("Thermocouple test complete !!!!!!");
+  delay(1000);
   return true;
 }
 
 bool DS18B20Test()
 {
-  Serial.println("Running DS18B20 test !!!!!!!!!!");
+  lcd.clear();
+  lcd.println("Running DS18B20 test !!!!!!!!!!");
+  delay(1000);
   int count = 0;
   while (count < 10)
   {
@@ -108,18 +115,18 @@ bool DS18B20Test()
     // {
     //   Serial.println("The DS18B20 sensors are not appropriately connected!!!!!!")
     // }
-    Serial.println("There are two DS18B20 sensors connected.");
+    lcd.println("There are two DS18B20 sensors connected.");
     if (sensor0.getTempCByIndex(0) > 0 && sensor0.getTempCByIndex(0) < 50 && sensor1.getTempCByIndex(0) > 0 && sensor1.getTempCByIndex(0))
     {
       count++;
-      Serial.println("The value of count is: ");
-      Serial.print(count);
     }
     else
     {
       continue;
     }
   }
-  Serial.println("Exiting DS18B20 test.....!!!!!");
+  lcd.clear();
+  lcd.println("Exiting DS18B20 test.....!!!!!");
+  delay(1000);
   return true;
 }
