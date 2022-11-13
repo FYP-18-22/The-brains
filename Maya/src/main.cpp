@@ -20,6 +20,12 @@ DallasTemperature sensor0(&oneWire);
 DallasTemperature sensor1(&oneWire1);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
+// function prototypes
+bool tests();
+bool lcdTest();
+bool thermocoupleTest();
+bool DS18B20Test();
+
 void setup(void)
 {
 
@@ -28,7 +34,7 @@ void setup(void)
   sensor1.begin();
   Serial.println("Beginning tests");
   tests();
-  Serial.println("Tests complete...........")
+  Serial.println("Tests complete...........");
 }
 void loop(void)
 {
@@ -54,6 +60,9 @@ bool tests()
   {
   }
   while (!DS18B20Test())
+  {
+  }
+  return true;
 }
 
 bool lcdTest()
@@ -65,7 +74,6 @@ bool lcdTest()
   Serial.println("LCD printing......");
   delay(1000);
   return true;
-
 }
 bool thermocoupleTest()
 {
@@ -100,7 +108,7 @@ bool DS18B20Test()
     // {
     //   Serial.println("The DS18B20 sensors are not appropriately connected!!!!!!")
     // }
-    Serial.println("There are two DS18B20 sensors connected."); 
+    Serial.println("There are two DS18B20 sensors connected.");
     if (sensor0.getTempCByIndex(0) > 0 && sensor0.getTempCByIndex(0) < 50 && sensor1.getTempCByIndex(0) > 0 && sensor1.getTempCByIndex(0))
     {
       count++;
