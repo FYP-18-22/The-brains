@@ -38,7 +38,7 @@ jobs:
           asset_name: maya
           tag: ${{ github.ref }}
           overwrite: true
-          body: "Mayas latest release"
+
             
             
       
