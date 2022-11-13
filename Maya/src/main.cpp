@@ -26,7 +26,7 @@ bool tests();
 bool lcdTest();
 bool thermocoupleTest();
 bool DS18B20Test();
-void print_lcd(String myText);
+void print_lcd(float temp1, float temp2, float temp3);
 
 
 //Global variables
@@ -121,8 +121,10 @@ bool DS18B20Test()
 {
   lcd.clear();
   lcd.println("Running DS18B20 test !!!!!!!!!!");
+  lcd.clear();
   delay(1000);
   int count = 0;
+  
   while (count < 10)
   {
     delay(100);
@@ -154,6 +156,7 @@ void print_lcd(float temp1, float temp2, float temp3){
   lcd.setCursor(0,1);
   lcd.print("Probe 1: ");
   lcd.print(temp2);
+  lcd.setCursor(0,2);
   lcd.print("Probe 2: ");
   lcd.print(temp3);
 
