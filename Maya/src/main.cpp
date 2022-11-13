@@ -30,7 +30,10 @@ void print_lcd(String myText);
 
 
 //Global variables
-unsigned long lastRead;
+unsigned long lastRead = 0;
+float thermocoupleTemp = 0.0;
+float DS18B20Temp0 = 0.0;
+float DS18B20Temp1 = 0.0; 
 
 void setup(void)
 {
@@ -42,19 +45,26 @@ void setup(void)
 }
 void loop(void)
 {
-
+  
   sensor0.requestTemperatures();
   sensor1.requestTemperatures(); // Send the command to get temperature readings
                                  // Serial.println("DONE");
   /********************************************************************/
+  float thermocoupleTemp = thermocouple.readCelsius();
+  float DS18B20Temp0 = sensor0.getTempCByIndex(0);
+  float DS18B20Temp1 = sensor1.getTempCByIndex(0);
+
   Serial.print("C = ");
-  Serial.println(thermocouple.readCelsius());
-  lcd.print(thermocouple.readCelsius());
+  Serial.println(thermocoupleTemp);
   Serial.print("Temp 1 is: ");
-  Serial.println(sensor0.getTempCByIndex(0));
-  lcd.print(sensor0.getTempCByIndex(0));
+  Serial.println(DS18B20Temp0);
   Serial.print("Temp 2 is: ");
-  Serial.println(sensor1.getTempCByIndex(0));
+  Serial.println(DS18B20Temp1);
+  if(millis()-lastRead >= 1000){
+    print_lcd(thermocoupleTemp,DS18B20Temp0,DS18B20Temp1);
+    lastRead=millis();
+  }
+
  
   
 }
@@ -136,7 +146,15 @@ bool DS18B20Test()
   return true;
 }
 
-void print_lcd(String myText){
+void print_lcd(float temp1, float temp2, float temp3){
   lcd.clear();
-  lcd.print(myText);
+  lcd.setCursor(0,0);
+  lcd.print("Thermocouple: ");
+  lcd.print(temp1);
+  lcd.setCursor(0,1);
+  lcd.print("Probe 1: ");
+  lcd.print(temp2);
+  lcd.print("Probe 2: ");
+  lcd.print(temp3);
+
 }
