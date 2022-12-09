@@ -1,2 +1,5 @@
 # The-brains
-Maya is the contro logic of te cooling system
+Maya refers to the supernatural power wielded by gods and demons in hinduism
+
+Maya is the control logic of the cooling system.
+## Directory structure
