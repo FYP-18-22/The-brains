@@ -11,8 +11,8 @@ float final_coolant_temperature;
 #define zc_interrupt 0
 #define pump_control 7 
 #else
-#define zc_interrupt PA0
-#define pump_control PB4
+#define zc_interrupt PB8
+#define pump_control PB14
 #endif
 
 int wait_time;
