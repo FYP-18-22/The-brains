@@ -37,7 +37,7 @@ void setup()
 void loop()
 {
   //put your main code here, to run repeatedly:
-  if(firing_time <= 4)
+  if(firing_time <= 9)
   {
     digitalWrite(green_led, HIGH);
     digitalWrite(fan_switch, LOW);
@@ -45,6 +45,7 @@ void loop()
   }
   else
   {
+    firing_time = 10;
     delay(5000);
     digitalWrite(green_led, LOW);
     digitalWrite(white_led, LOW);
@@ -77,33 +78,36 @@ void flow_rate_test()
   current_time = millis();
   if(pump_flag == 0)
   {
-    for(int full_speed = 0; full_speed <= 14; full_speed++)
+    for(int full_speed = 0; full_speed <= 8; full_speed++)
     {
       delay(1000);
       digitalWrite(pump_control, HIGH);
       Serial.print("Full speed temp. data is : ");
       Serial.println("last value");
     }
-    pump_flag = 1;    
+    digitalWrite(pump_control, LOW);
+    pump_flag = 1;
   }
   else
   {
     
-    if((current_time - prev_time >= 3000) && (firing_time <= 4))
-    {
-      digitalWrite(white_led, HIGH);
-      firing_time += 1; 
-      prev_time = current_time;
-      Serial.println(firing_time);
-      Serial.print("Controlled temp data is: ");
-      Serial.println("controlled value");
-    }
-    else
-    {
-      //digitalWrite(white_led, LOW);
-      //Serial.println(firing_time);
-      firing_time = firing_time;
-    }
+    firing_time = 5;
+    Serial.println(firing_time);
+    // if((current_time - prev_time >= 8000) && (firing_time <= 9))
+    // {
+    //   digitalWrite(white_led, HIGH);
+    //   firing_time += 1; 
+    //   prev_time = current_time;
+    //   Serial.println(firing_time);
+    //   Serial.print("Controlled temp data is: ");
+    //   Serial.println("controlled value");
+    // }
+    // else
+    // {
+    //   //digitalWrite(white_led, LOW);
+    //   //Serial.println(firing_time);
+    //   firing_time = firing_time;
+    // }  
   }
     
 }
