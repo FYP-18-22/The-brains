@@ -2,8 +2,8 @@
 #include <defs.h>
 
 short int firing_time = 0;
-short int prev_time;
-short int current_time;
+int prev_time;
+int current_time;
 short int initial_time;
 short int pump_flag = 0;
 void flow_rate_test();
@@ -16,10 +16,18 @@ void setup()
   Serial.begin(115200);
   pinMode(zc_interrupt, INPUT);
   pinMode(pump_control, OUTPUT);
+  pinMode(fan_switch, OUTPUT);
+  pinMode(green_led, OUTPUT);
+  pinMode(white_led, OUTPUT);
   pinMode(PC13, OUTPUT);
   digitalWrite(PC13, LOW);
+  digitalWrite(fan_switch, HIGH);
+  delay(setup_time);
+  digitalWrite(fan_switch, LOW);
+  delay(3000);
   attachInterrupt(zc_interrupt, change_flow_rate, CHANGE);
-  
+  digitalWrite(green_led, LOW);
+  digitalWrite(white_led, LOW);
   prev_time = millis();
   initial_time = millis();
 }
@@ -29,23 +37,28 @@ void setup()
 void loop()
 {
   //put your main code here, to run repeatedly:
-  current_time = millis();
-  if((current_time - initial_time >= 8000) && (current_time - prev_time >= 3000) && (firing_time <= 4))
+  if(firing_time <= 4)
   {
-    firing_time += 1; 
-    prev_time = current_time;
-    Serial.println(firing_time);
+    digitalWrite(green_led, HIGH);
+    digitalWrite(fan_switch, LOW);
+    flow_rate_test();
   }
   else
   {
-    firing_time = firing_time;
+    delay(5000);
+    digitalWrite(green_led, LOW);
+    digitalWrite(white_led, LOW);
+    pump_flag = 0;
+    digitalWrite(pump_control, LOW);
+    delay(2000);
+    digitalWrite(fan_switch, HIGH);
   }
   
 }
 
 void change_flow_rate()
 {
-  if(pump_flag = 0)
+  if(pump_flag == 0)
   {
     firing_time = firing_time;
   }
@@ -61,25 +74,36 @@ void change_flow_rate()
 
 void flow_rate_test()
 {
-  digitalWrite(fan_switch, HIGH);
   current_time = millis();
-  for(int speed_boost = 0; speed_boost <= 7; speed_boost++)
+  if(pump_flag == 0)
   {
-    digitalWrite(pump_control, HIGH);
-    delay(1000);
-  }
-  pump_flag = 1;
-
-  if((current_time - prev_time >= 3000) && (firing_time <= 4))
-  {
-    firing_time += 1; 
-    prev_time = current_time;
-    Serial.println(firing_time);
+    for(int full_speed = 0; full_speed <= 14; full_speed++)
+    {
+      delay(1000);
+      digitalWrite(pump_control, HIGH);
+      Serial.print("Full speed temp. data is : ");
+      Serial.println("last value");
+    }
+    pump_flag = 1;    
   }
   else
   {
-    firing_time = firing_time;
+    
+    if((current_time - prev_time >= 3000) && (firing_time <= 4))
+    {
+      digitalWrite(white_led, HIGH);
+      firing_time += 1; 
+      prev_time = current_time;
+      Serial.println(firing_time);
+      Serial.print("Controlled temp data is: ");
+      Serial.println("controlled value");
+    }
+    else
+    {
+      //digitalWrite(white_led, LOW);
+      //Serial.println(firing_time);
+      firing_time = firing_time;
+    }
   }
-
-
+    
 }

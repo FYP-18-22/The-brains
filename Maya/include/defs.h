@@ -14,6 +14,9 @@ float final_coolant_temperature;
 #define zc_interrupt PB8
 #define pump_control PB14
 #define fan_switch PB4
+#define green_led PB15
+#define white_led PA9
+#define setup_time 20000
 // #endif
 
 int wait_time;
